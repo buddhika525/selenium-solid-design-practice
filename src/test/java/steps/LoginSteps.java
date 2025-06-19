@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import context.TestContext;
 import driver.DriverGenerator;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,10 +20,14 @@ public class LoginSteps {
 	WebDriver driver;
 	LoginPage loginPage;
 	
+	public LoginSteps() {
+		TestContext testContext = new TestContext();
+		driver = testContext.getDriver();
+	}
+	
 	@Given("user goes to {string}")
 	public void user_goes_to(String string) throws IOException {
 	    // Write code here that turns the phrase above into concrete actions
-		driver = new DriverGenerator().getWebDriver();
 	    driver.get("https://www.saucedemo.com/");
 	    driver.manage().window().maximize();
 	    loginPage = new LoginPage(driver);

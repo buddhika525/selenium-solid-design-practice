@@ -14,12 +14,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class DriverGenerator {
 	
 	private WebDriver driver;
-	private Properties prop;
 	
-	private void initializeDriver() throws IOException
+	public WebDriver initializeDriver(String browser) 
 	{
-		prop = new ConfigReader().loadProperties();
-		String browser = prop.getProperty("browser").toLowerCase();
 		switch(browser) {
 			case "chrome":{
 				WebDriverManager.chromedriver().setup();
@@ -40,11 +37,7 @@ public class DriverGenerator {
 				throw new IllegalArgumentException("invalid browser " + browser);
 			}
 		}
-	}
-	
-	public WebDriver getWebDriver() throws IOException {
-		initializeDriver();
+		
 		return driver;
 	}
-
 }
