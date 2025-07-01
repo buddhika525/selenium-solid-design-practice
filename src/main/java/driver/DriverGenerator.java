@@ -1,15 +1,6 @@
 package driver;
 
-import java.io.IOException;
-import java.util.Properties;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import config.ConfigReader;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverGenerator {
 	
@@ -19,18 +10,15 @@ public class DriverGenerator {
 	{
 		switch(browser) {
 			case "chrome":{
-				WebDriverManager.chromedriver().setup();
-				driver = new ChromeDriver();
+				driver = new ChromeStrategy().setupDriver();
 				break;
 			}
 			case "firefox":{
-				WebDriverManager.firefoxdriver().setup();
-				driver = new FirefoxDriver();
+				driver = new FirefoxStrategy().setupDriver();
 				break;
 			}
 			case "edge":{
-				WebDriverManager.edgedriver().setup();
-				driver = new EdgeDriver();
+				driver = new EdgeStrategy().setupDriver();
 				break;
 			}
 			default:{

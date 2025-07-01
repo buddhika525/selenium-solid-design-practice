@@ -1,28 +1,27 @@
 package steps;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context.TestContext;
-import driver.DriverGenerator;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.LoginPage;
 
 public class LoginSteps {
 	
 	WebDriver driver;
 	LoginPage loginPage;
+	WebDriverWait wait;
 	
 	public LoginSteps() {
 		TestContext testContext = new TestContext();
 		driver = testContext.getDriver();
+		testContext.setupWebDriverWait(driver);
+		wait = testContext.getDriverWait();
 	}
 	
 	@Given("user goes to {string}")
@@ -30,7 +29,7 @@ public class LoginSteps {
 	    // Write code here that turns the phrase above into concrete actions
 	    driver.get("https://www.saucedemo.com/");
 	    driver.manage().window().maximize();
-	    loginPage = new LoginPage(driver);
+	    loginPage = new LoginPage(driver, wait);
 	    //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
 	

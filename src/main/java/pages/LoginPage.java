@@ -4,14 +4,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import utils.SeleniumWrapper;
 
 public class LoginPage {
 	
-	WebDriver driver;
+	//WebDriver driver;
+	WebDriverWait wait;
+	SeleniumWrapper wrapper;
 	
-	public LoginPage(WebDriver driver) {
-		this.driver = driver;
+	public LoginPage(WebDriver driver, WebDriverWait wait) {
+		
 		PageFactory.initElements(driver, this);
+		wrapper = new SeleniumWrapper(wait);
 	}
 	
 	@FindBy(id="user-name")
@@ -24,15 +30,15 @@ public class LoginPage {
 	WebElement loginBtn;
 	
 	public void inputUsername(String username) {
-		usernameField.sendKeys(username);
+		wrapper.sendKeys(usernameField, username);
 	}
 	
 	public void inputPassword(String password) {
-		passwordField.sendKeys(password);
+		wrapper.sendKeys(passwordField, password);
 	}
 	
 	public void clickonLoginBtn() {
-		loginBtn.click();
+		wrapper.click(loginBtn);
 	}
 
 }
